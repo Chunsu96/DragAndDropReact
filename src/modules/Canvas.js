@@ -4,12 +4,12 @@ import "../App.css";
 
 function Canvas() {
 
+const resourceGroups = new Array(4).fill(null);
+
 return (
-      <div  className="canvas" >
-          <App/>
-          <App/>
-          <App/>
-      </div>
+    <div  className="canvas" >
+        {resourceGroups.map((_, idx) => <App/>)}
+    </div>
   );
 }
 
