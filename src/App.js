@@ -36,7 +36,7 @@ const DATA = [
   },
 ];
 
-function App({onClose}) {
+function App({onClose, ident}) {
   const [stores, setStores] = useState(DATA);
 
   const draggableRef = useRef(null);
@@ -113,7 +113,7 @@ function App({onClose}) {
         }}>
           <div className="draggable-panel" onMouseDown={handleMouseDown}>
             <div>
-              <img className="red_cross" src="/images/red_cross2.png" alt="" onClick={onClose}/>
+              <img id={ident} className="red_cross" src="/images/red_cross2.png" alt="" onClick={onClose}/>
             </div>
             <div className="header">
               <h2>Resource Group</h2>
