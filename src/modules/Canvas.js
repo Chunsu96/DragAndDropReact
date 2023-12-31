@@ -26,15 +26,15 @@ const [resourceGroups, setResourceGroup] = useState(initialArtists);
 function onClose(e)
 {
   console.log("Close Clicked" )
-  setResourceGroup(
-    resourceGroups.filter(a =>
-      a.id !== e.currentTarget.id))
+  var newResources = resourceGroups.filter(a => a.id !== e.currentTarget.id)
+  setResourceGroup(newResources)
 }
 
 //Variables to add items onto Canvas
 const addItem = () => {
-  setResourceGroup(
-    resourceGroups.push(  { id: uuidv4(), name: 'Resource Group' }))
+  var newResources = resourceGroups
+  newResources.push({ id: uuidv4(), name: 'Resource Group' })
+  setResourceGroup(newResources)
 }
 
 
