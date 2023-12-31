@@ -12,36 +12,36 @@ function ForceUpdate()
   // is better than directly setting `setValue(value + 1)`
 }
 
+let initialArtists = [
+  { id: uuidv4(), name: 'Resource Group 1' },
+  { id: uuidv4(), name: 'Resource Group 2'},
+  { id: uuidv4(), name: 'Resource Group 3'},
+];
+
 function Canvas() {
 
 const [value, setValue] = useState(0); // integer state
-
-var resourceGroups = new Array(4).fill(null);
-resourceGroups = resourceGroups.map(x=> uuidv4());
-
+const [resourceGroups, setResourceGroup] = useState(initialArtists);
 
 function onClose(e)
 {
-
   console.log("Close Clicked" )
-  resourceGroups = resourceGroups.filter(x => x != e.currentTarget.id)
-
-  return () => setValue(value => value + 1); // update state to force render
+  setResourceGroup(
+    resourceGroups.filter(a =>
+      a.id !== e.currentTarget.id))
 }
 
 //Variables to add items onto Canvas
-const [{items}, setItems] = useState({ items: [] });
 const addItem = () => {
-  items.push(<div key={items.length}>This is a test</div>);
-  setItems({ items: [...items] });
+  setResourceGroup(
+    resourceGroups.push(  { id: uuidv4(), name: 'Resource Group' }))
 }
 
 
 return (
     <div  className="canvas">
       <button className = "rg_button" onClick={addItem}>New Resource Group</button>;
-      {items}
-      {resourceGroups.map((_, idx) => <App key={idx} onClose={onClose} ident={resourceGroups[idx]}/>)}
+      {resourceGroups.map((_, idx) => <App key={idx} onClose={onClose} ident={resourceGroups[idx].id}/>)}
     </div>
   );
 }
