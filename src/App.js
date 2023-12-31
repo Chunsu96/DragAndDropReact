@@ -36,7 +36,7 @@ const DATA = [
   },
 ];
 
-function App() {
+function App({onClose}) {
   const [stores, setStores] = useState(DATA);
 
   const draggableRef = useRef(null);
@@ -49,6 +49,7 @@ function App() {
     const { source, destination, type } = results;
     
     console.log("Handling drag and drop")
+    results.stopPropagation();
 
     if (!destination) return;
 
@@ -111,8 +112,11 @@ function App() {
           left: position.x
         }}>
           <div className="draggable-panel" onMouseDown={handleMouseDown}>
+            <div>
+              <img className="red_cross" src="/images/red_cross2.png" alt="" onClick={onClose}/>
+            </div>
             <div className="header">
-              <h1>Resource Group</h1>
+              <h2>Resource Group</h2>
             </div>
           </div>
           <div className="draggable-content">
