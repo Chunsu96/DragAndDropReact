@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ResourceGroup from './ResourceGroup'
 import "../Css/ResourceGroup.css";
 import { v4 as uuidv4 } from 'uuid';
+import Toolbox from './Toolbox';
 
 
 let initialResourceGroups = [
@@ -35,6 +36,7 @@ return (
     <div  className="canvas">
       <button className = "rg_button" onClick={addItem}>New Resource Group</button>;
       {resourceGroups.map((_, idx) => <ResourceGroup key={idx} onClose={onClose} onAdd={addItem} ident={resourceGroups[idx].id} rgName={resourceGroups[idx].name} x={resourceGroups[idx].x} y={resourceGroups[idx].y}/>)}
+      <Toolbox x={10} y={200} />
     </div>
   );
 }

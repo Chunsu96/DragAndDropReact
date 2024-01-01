@@ -15,33 +15,24 @@ const DATA = [
   {
     id: uuidv4(),
     name: "Function App",
-    items: [
-      { id: uuidv4(), name: "func-MyFunc" },
-      { id: uuidv4(), name: "UK South" },
-    ],
+    items: [],
     tint: 1,
   },
   {
     id: uuidv4(),
     name: "Web Application",
-    items: [
-      { id: uuidv4(), name: "app-MyApp" },
-      { id: uuidv4(), name: "UK South" },
-    ],
+    items: [],
     tint: 2,
   },
   {
     id: uuidv4(),
     name: "Key Vault",
-    items: [
-      { id: uuidv4(), name: "kv-MyVault" },
-      { id: uuidv4(), name: "UK South" },
-    ],
+    items: [],
     tint: 3,
   },
 ];
 
-function ResourceGroup({onClose, ident, rgName, x, y}) {
+function Toolbox({onClose, ident, rgName, x, y}) {
   const [stores, setStores] = useState(DATA);
 
   const draggableRef = useRef(null);
@@ -114,12 +105,9 @@ function ResourceGroup({onClose, ident, rgName, x, y}) {
           top: ((position.y !== undefined) ? position.y : y),
           left: ((position.x !== undefined) ? position.x : x)
         }}>
-          <div className="draggable-panel" onMouseDown={handleMouseDown}>
-            <div>
-              <img id={ident} className="red_cross" src="/images/red_cross2.png" alt="" onClick={onClose}/>
-            </div>
+          <div className="draggable-panel">
             <div className="header">
-              <h2>{rgName}</h2>
+              <h2>Resource Toolbox</h2>
             </div>
           </div>
           <div className="draggable-content">
@@ -155,4 +143,4 @@ function ResourceGroup({onClose, ident, rgName, x, y}) {
   );
 }
 
-export default ResourceGroup;
+export default Toolbox;
