@@ -1,8 +1,8 @@
 
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import "../App.css";
+import "../Css/ResourceGroup.css";
 
-function StoreList({ name, items, id }) {
+function Resource({ name, items, id }) {
     return (
       <Droppable droppableId={id}>
         {(provided) => (
@@ -33,4 +33,4 @@ function StoreList({ name, items, id }) {
     ); 
 }
  
-export default StoreList
+export default Resource

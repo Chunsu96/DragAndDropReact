@@ -1,10 +1,15 @@
+// Import 3rd party libraries
 import { useEffect, useState, useRef } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { useDrag } from "./modules/UseDrag.js";
-import StoreList from './modules/StoreList'
-import "./App.css";
-import EditableLabel from "./modules/EditableLabel";
 import { v4 as uuidv4 } from 'uuid';
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useDrag } from "./UseDrag.js";
+
+// Import css files
+import "../Css/ResourceGroup.css";
+
+// Import custom created modules
+import Resource from './Resource.js'
+import EditableLabel from "./EditableLabel.js";
 
 const DATA = [
   {
@@ -36,11 +41,10 @@ const DATA = [
   },
 ];
 
-function App({onClose, ident}) {
+function ResourceGroup({onClose, ident, rgName, x, y}) {
   const [stores, setStores] = useState(DATA);
 
   const draggableRef = useRef(null);
-
   const { position, handleMouseDown } = useDrag({
     ref: draggableRef
   });
@@ -48,7 +52,6 @@ function App({onClose, ident}) {
   const handleDragAndDrop = (results) => {
     const { source, destination, type } = results;
     
-    console.log("Handling drag and drop")
     results.stopPropagation();
 
     if (!destination) return;
@@ -101,6 +104,8 @@ function App({onClose, ident}) {
     };
 
     setStores(newStores);
+
+
   };
 
   return (
@@ -108,15 +113,15 @@ function App({onClose, ident}) {
       <div className="card" 
           ref={draggableRef}
           style={{
-          top: position.y,
-          left: position.x
+          top: ((position.y !== undefined) ? position.y : y),
+          left: ((position.x !== undefined) ? position.x : x)
         }}>
           <div className="draggable-panel" onMouseDown={handleMouseDown}>
             <div>
               <img id={ident} className="red_cross" src="/images/red_cross2.png" alt="" onClick={onClose}/>
             </div>
             <div className="header">
-              <h2>Resource Group</h2>
+              <h2>{rgName}</h2>
             </div>
           </div>
           <div className="draggable-content">
@@ -136,7 +141,7 @@ function App({onClose, ident}) {
                             {...provided.draggableProps}
                             ref={provided.innerRef}
                           >
-                            <StoreList {...store} />
+                            <Resource {...store} />
                           </div>
                         )}
                       </Draggable>
@@ -152,4 +157,4 @@ function App({onClose, ident}) {
   );
 }
 
-export default App;
+export default ResourceGroup;
